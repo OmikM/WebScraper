@@ -15,11 +15,9 @@ print(df)
     # time program will wait in secounds before refreshing web 
 while True:
     i = 0
-    for row in df.values:
+    for i, row in df.iterrows():
         nrow = check(*list(row))
-        
         if list(row)!=nrow:
             df.loc[i] = nrow
-        i+=1
         df.to_csv('data.csv', index=False)
-        time.sleep(10000)
+    time.sleep(10000)

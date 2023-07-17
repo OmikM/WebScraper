@@ -1,7 +1,8 @@
 import time, requests
 from bs4 import BeautifulSoup
+from notifications import sendMail
 
-def check(Name,url,last_pkl,last_views,last_login):
+def check(Name,url,last_pkl,last_views,last_login,email):
     Time = time.strftime("%D:%H:%M:%S", time.localtime())
     with open("logs.txt", "a") as file:
         file.write("______________________\n"+Time+'\n')
@@ -18,17 +19,16 @@ def check(Name,url,last_pkl,last_views,last_login):
 
     if last_pkl != pkl:
         with open("logs.txt", "a") as file:
-            file.write("Now you have"+str(pkl)+"PKLs. you have received"+str(pkl-last_pkl)+"\n")
+            msg = Name+": Now you have"+str(pkl)+"PKLs. you have received"+str(pkl-last_pkl)+"\n"
+            file.write(msg)
+        if email!= None:
+            sendMail(email, msg)
         last_pkl = pkl
     if views>last_views+1:
         with open("logs.txt", "a") as file:
-            file.write(str(views-(last_views+1))+"People have viewd now its"+str(views)+"\n")
-
-    with open("data.txt", "w") as file:
-        file.write(str(pkl)+"\n")
-        file.write(str(views)+"\n")
-        file.write(Time)
+            msg = Name+": Now you have str(views)"+str(views-(last_views+1))+"have viewd \n"
+            file.write(msg)
 
     last_views = views
     last_login = Time
-    return Name,url,last_pkl,last_views,last_login
+    return Name,url,last_pkl,last_views,last_login,email

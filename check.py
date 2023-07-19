@@ -21,7 +21,7 @@ def check(Name,url,last_pkl,last_views,last_login,email):
         with open("logs.txt", "a") as file:
             msg = Name+": Now you have"+str(pkl)+"PKLs. you have received"+str(pkl-last_pkl)+"\n"
             file.write(msg)
-        if email!= None:
+        if email!="None":
             sendMail(email, msg)
         last_pkl = pkl
     if views>last_views+1:

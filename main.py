@@ -11,7 +11,6 @@ from check import check
 
 df = pd.read_csv('data.csv')
 
-print(df)
     # time program will wait in secounds before refreshing web 
 while True:
     i = 0
